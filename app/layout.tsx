@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/shared/header";
+import { ThemeProvider } from "@/components/shared/theme-provider";
 
 const nunito = Nunito({
   subsets: ["cyrillic"],
@@ -20,10 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={nunito.variable}>
-        <Header />
-        <main className="min-h-screen w-[1240px] m-auto">{children}</main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <Header />
+          <main className="min-h-screen w-[1240px] m-auto">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );
