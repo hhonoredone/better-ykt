@@ -29,7 +29,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange>
           <Header />
-          <main className="min-h-screen w-[1240px] m-auto">{children}</main>
+          <main className="min-h-screen max-w-[1240px] w-full m-auto ">{children}</main>
         </ThemeProvider>
       </body>
     </html>
