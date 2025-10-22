@@ -4,8 +4,9 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Title } from "./title";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { news } from "../../lib/constants";
+import { news } from "../../lib/data";
 import { Separator } from "../ui/separator";
+import Link from "next/link";
 
 interface Props {
   className?: string;
@@ -35,8 +36,10 @@ export const Newsbar: React.FC<Props> = ({ className }) => {
       />
       <Separator />
       {news.slice(0, visibleCount).map((newsItem) => (
-        <div key={newsItem.id} className="mb-4 cursor-pointer hover:text-gray-500 mt-3">
-          <p className="text-sm leading-4">{newsItem.title}</p>
+        <div key={newsItem.id} className="mb-4 hover:text-gray-500 mt-3">
+          <Link href={newsItem.link} target="_blank">
+            <p className="text-sm leading-4 cursor-pointer">{newsItem.title}</p>
+          </Link>
           <p className="text-[11px] mt-1  text-gray-400">{newsItem.date}</p>
         </div>
       ))}

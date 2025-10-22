@@ -1,58 +1,51 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Building, ClipboardCheck, House, HousePlus, Popcorn, Users, Utensils } from "lucide-react";
+import { Building, ClipboardCheck, Home, Popcorn, Users, Utensils } from "lucide-react";
+import { useServiceStore } from "@/store/service";
 
 interface Props {
   className?: string;
 }
 
+const services = [
+  { id: "doska", name: "Доска", icon: ClipboardCheck },
+  { id: "afisha", name: "Афиша", icon: Popcorn },
+  { id: "rabota", name: "Работа", icon: Users },
+  { id: "eda", name: "Еда", icon: Utensils },
+  { id: "domiki", name: "Домики", icon: Home },
+  { id: "novostroyki", name: "Новостройки", icon: Building },
+];
+
 export const Sidebar: React.FC<Props> = ({ className }) => {
+  const serviceActiveId = useServiceStore((state) => state.activeId);
+
   return (
-    <div className="sticky top-[70px] py-4 max-w-[220px] ">
+    <div className={cn("sticky top-[70px] py-4 max-w-[220px]", className)}>
       <ul className="grid gap-[4px]">
-        {/* <Button variant="secondary" className="pl-5">
-          <div className="flex items-center">
-            <House className="mr-3 icon " color="hsl(var(--primary))" />
-            <p className="text-[17px]">Главная</p>
-          </div>
-        </Button> */}
-        <Button variant="secondary" className="pl-5">
-          <div className="flex items-center">
-            <ClipboardCheck className="mr-3" color="hsl(var(--primary))" />
-            <p className="text-[17px]">Доска</p>
-          </div>
-        </Button>
-        <Button variant="ghost" className="pl-5">
-          <div className="flex items-center">
-            <Popcorn className="mr-3" opacity={0.7} />
-            <p className="text-[17px]">Афиша</p>
-          </div>
-        </Button>
-        <Button variant="ghost" className="pl-5">
-          <div className="flex items-center">
-            <Users className="mr-3" opacity={0.7} />
-            <p className="text-[17px]">Работа</p>
-          </div>
-        </Button>
-        <Button variant="ghost" className="pl-5">
-          <div className="flex items-center">
-            <Utensils className="mr-3" opacity={0.7} />
-            <p className="text-[17px]">Еда</p>
-          </div>
-        </Button>
-        <Button variant="ghost" className="pl-5">
-          <div className="flex items-center">
-            <HousePlus className="mr-3" opacity={0.7} />
-            <p className="text-[17px]">Домики</p>
-          </div>
-        </Button>
-        <Button variant="ghost" className="pl-5">
-          <div className="flex items-center">
-            <Building className="mr-3" opacity={0.7} />
-            <p className="text-[17px]">Новостройки</p>
-          </div>
-        </Button>
+        {services.map((service) => {
+          const IconComponent = service.icon;
+          const isActive = serviceActiveId === service.id;
+
+          return (
+            <a key={service.id} href={`#${service.id}`}>
+              <Button
+                variant={isActive ? "secondary" : "ghost"}
+                className="pl-5 justify-start w-full">
+                <div className="flex items-center">
+                  <IconComponent
+                    className="mr-3"
+                    color={isActive ? "hsl(var(--primary))" : undefined}
+                    opacity={isActive ? 1 : 0.7}
+                  />
+                  <p className="text-[17px]">{service.name}</p>
+                </div>
+              </Button>
+            </a>
+          );
+        })}
       </ul>
     </div>
   );

@@ -1,0 +1,18 @@
+export type IconName =
+  | "HousePlus"
+  | "Car"
+  | "Gift"
+  | "PawPrint"
+  | "Computer"
+  | "Armchair"
+  | "Shirt"
+  | "Utensils"
+  | "Wrench"
+  | "Baby"
+  | "Calendar"
+  | "Building"
+  | "Heart"
+  | "Star"
+  | "ShoppingCart"
+  | "Phone"
+  | "Mail";

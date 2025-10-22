@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/shared/header";
-import { ThemeProvider } from "@/components/shared/theme-provider";
 
 const nunito = Nunito({
   subsets: ["cyrillic"],
@@ -12,7 +11,6 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   title: "Betterykt",
-  description: "Redesign of ykt.ru",
 };
 
 export default function RootLayout({
@@ -23,14 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={nunito.variable}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange>
-          <Header />
-          <main className="min-h-screen max-w-[1240px] w-full m-auto ">{children}</main>
-        </ThemeProvider>
+        <Header />
+        <main className="max-w-[1240px] w-full mx-auto relative min-h-screen">{children}</main>
       </body>
     </html>
   );
